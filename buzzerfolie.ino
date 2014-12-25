@@ -92,14 +92,22 @@
 
 void setup(void)
 {
+  Serial.begin(9600); 
   pinMode(BuzzerPin, OUTPUT);//buzzer 
+  initPing(9,8);
 }
+
+
 void loop()
 {
-  //sing the tunes
-    buzz(BuzzerPin,NOTE_G6,50);
-    buzz(BuzzerPin,NOTE_D6,50);
-    buzz(BuzzerPin,NOTE_C7,50);
+    int distanceCm=pingDistanceInCm();
+     Serial.println(distanceCm);
+
+    if(distanceCm < 20){
+      buzz(BuzzerPin,NOTE_G6,10);
+    }else{
+      buzz(BuzzerPin,NOTE_C7,10);
+    }
     delay(200);
 }
 
